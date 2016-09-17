@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<title>Quotissimo</title>
+	 
+	<link href="css/bootstrap.css" rel="stylesheet">
+	 
+	<link href="css/main.css" rel="stylesheet">
+ 
+	<link rel="shortcut icon" href="images/favicon.png">
+	<script src="js/pace.js"></script>
+ 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <! -- ******************** MASTHEAD SECTION ******************** -->	
+    <div class="navbar navbar-fixed-top">
+        <div class="col-md-6 col-sm-12 col-md-offset-3 subscribe">
+            <form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
+                <div class="form-group">
+                    <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
+                        <input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter a Twitter Handle" data-validate="validate(required, email)" required="required">
+                    </div>
+                    <div class="col-md-5 col-sm-4">
+                        <button type="submit" class="btn btn-success btn-lg">QUOTE ME</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+	<main id="top" class="masthead" role="main">
+		<div class="container">
+            <div class="logo">
+                <p>Quotissimo</p>
+			</div>
+ 
+			<h1>Hello!</h1>
+            <h3>Quote of the Day:</h3>
+		</div><! --/container -->
+	</main><! --/main -->
+ 
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/easing.js"></script>
+<script src="js/nicescroll.js"></script>
+
+<script>
+
+ $(function() {
+    $('.scrollto, .gototop').bind('click',function(event){
+		 var $anchor = $(this);
+		 $('html, body').stop().animate({
+         scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500,'easeInOutExpo');
+     event.preventDefault();
+      });
+  });
+        
+
+</script>
+ 
+</body>
+</html>
