@@ -38,10 +38,7 @@ def getTweets(screen_name, api):
 		return 'nope'
 
 def parseTweets(tweet_string):
-<<<<<<< HEAD
-=======
 
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
 	words = tweet_string.split()
 	toRemove = ['-', '_', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', 'htt', 'RT' , '`', '(', ')', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}', '...', '..']
 	for char in toRemove:
@@ -57,16 +54,16 @@ def parseTweets(tweet_string):
 
 def makeQuote(tweetList): 
 #for tweet in tweetList:
-<<<<<<< HEAD
+
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=100),indent=2))['relations']
-=======
+
 	
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=300),indent=2))['relations']
 
 		#print json.dumps(alchemy_language.entities(text =tweetList,max_items=100),indent=2)
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 
 	subjects = dict()
 	actions = dict()
@@ -86,19 +83,19 @@ def makeQuote(tweetList):
 			if objectWord not in objects:
 				objects[objectWord] = float(tweetList.count(objectWord))
 
-<<<<<<< HEAD
+
 	# get prob.'s' (SUBJECTS)
 	for key,value in subjects.iteritems():
 		subjects[key] = value/len(subjects)
 
 	# scale prob's
-=======
+
 		# get prob.'s' (SUBJECTS)
 	for key,value in subjects.iteritems():
 		subjects[key] = value/len(subjects)
 
 		# scale prob's
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 	sum =0.0;
 	for key,value in subjects.iteritems():
 		sum = sum + value
@@ -107,19 +104,19 @@ def makeQuote(tweetList):
 	#------------------------
 
 
-<<<<<<< HEAD
+
 	# get prob.'s' (OBJECTS)
 	for key,value in objects.iteritems():
 		objects[key] = value/len(objects)
 
 	# scale prob's
-=======
+
 		# get prob.'s' (OBJECTS)
 	for key,value in objects.iteritems():
 		objects[key] = value/len(objects)
 
 		# scale prob's
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 	sum =0.0;
 	for key,value in objects.iteritems():
 		sum = sum + value
@@ -128,19 +125,19 @@ def makeQuote(tweetList):
 	#------------------------
 
 
-<<<<<<< HEAD
+
 	# get prob.'s' (ACTIONS)
 	for key,value in actions.iteritems():
 		actions[key] = value/len(actions)
 
 	# scale prob's
-=======
+
 		# get prob.'s' (ACTIONS)
 	for key,value in actions.iteritems():
 		actions[key] = value/len(actions)
 
 		# scale prob's
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 	sum =0.0;
 	for key,value in actions.iteritems():
 		sum = sum + value
@@ -148,21 +145,20 @@ def makeQuote(tweetList):
 		actions[key] = value/sum
 	#------------------------
 
-<<<<<<< HEAD
+
 	# GENERATE QUOTE
-=======
+
 		# GENERATE QUOTE
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 
 	startSubject = numpy.random.choice(subjects.keys(),1)[0]
 	nextVerb = numpy.random.choice(actions.keys(),1)[0]
 	lastObj = numpy.random.choice(objects.keys(),1)[0]
 
-<<<<<<< HEAD
 	finalQuote = startSubject+" "+nextVerb+" "+lastObj
 
 	#print finalQuote
-=======
+
 	if startSubject.islower():
 		startSubject = startSubject.title()
 	if not nextVerb.islower() and not nextVerb.isupper():
@@ -180,13 +176,13 @@ def makeQuote(tweetList):
 
 
 		#print finalQuote
->>>>>>> f9e7c62908cd72ce9880e4ba153bdbabb89acf4f
+
 	return finalQuote
 
 	
-def getImage(screen_name, api):
-		user_info = api.get_user(screen_name)
-		if user_info
+# def getImage(screen_name, api):
+# 		user_info = api.get_user(screen_name)
+# 		if user_info
 
 	
 def printQuote(screen_name):
@@ -195,9 +191,9 @@ def printQuote(screen_name):
 	if not (string is 'nope'):
 		words = parseTweets(string)
 		final = makeQuote(words)
-		image = getImage(screen_name, api)
+		# image = getImage(screen_name, api)
 	print final
-	print image
+	# print image
 	return final
 
 printQuote('AnnCoulter')
