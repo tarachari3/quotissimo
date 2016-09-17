@@ -8,7 +8,7 @@ import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 import unicodedata
 import numpy
-import pyspotify
+import spotify
 
 app = Flask(__name__)
 
@@ -197,19 +197,12 @@ def getTone(quote):
 
 	return emotion
 
-
-	return finalQuote
-
-
 def getImage(screen_name, api):
 	user_info = api.get_user(screen_name)
-	if user_info.default_profile_image is False:
-		image_url = user_info.profile_image_url
-		image_url = image_url.replace('_normal', '')
-		return image_url
-	else:
-		return 
-
+	# user_info.default_profile_image is False:
+	image_url = user_info.profile_image_url
+	image_url = image_url.replace('_normal', '')
+	return image_url 
 	
 def printQuote(screen_name):
 	try:
