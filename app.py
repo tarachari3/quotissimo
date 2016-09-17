@@ -8,6 +8,7 @@ import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 import unicodedata
 import numpy
+import pyspotify
 
 app = Flask(__name__)
 
@@ -207,27 +208,30 @@ def getImage(screen_name, api):
 		image_url = image_url.replace('_normal', '')
 		return image_url
 	else:
-		return
+		return 
 
 	
 def printQuote(screen_name):
-	api = authorize()
-	string = getTweets(screen_name, api)
-	if not (string is 'nope'):
-		words = parseTweets(string)
-		final = makeQuote(words)
-		image = getImage(screen_name, api)
-		emotion = getTone(final)
-		# image = getImage(screen_name, api)
+	try:
+		api = authorize()
+		string = getTweets(screen_name, api)
+		if not (string is 'nope'):
+			words = parseTweets(string)
+			final = makeQuote(words)
+			image = getImage(screen_name, api)
+			emotion = getTone(final)
+			# image = getImage(screen_name, api)
 
-	print final
-	print emotion
-	# print image
+		print final
+		print emotion
+		# print image
+	except:
+		return 'JK - no quotes for you'
 
 def findMusic():
 	return
 
-print printQuote('VaidehiGarg')
+print printQuote('QuotaPotato')
 
 
 @app.route('/quoteGen2', methods=['POST'])
