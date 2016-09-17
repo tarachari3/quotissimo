@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myapp">
 
 <head>
 
@@ -29,10 +29,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="../static/js/searchtwitter.js"></script>
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
+<body ng-controller="search" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -40,16 +42,17 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
-                <div class="form-group">
-                    <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
-                        <input class="form-control input-lg" name="email" type="email" id="address" placeholder="enter a twitter name" data-validate="validate(required, email)" required="required">
+
+                <form class="form-horizontal" role="form" id="subscribeForm">
+                    <div class="form-group">
+                        <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
+                            <input ng-model='querry.name' class="form-control input-lg" type="text" placeholder="enter a twitter name">
+                        </div>
+                        <div class="col-md-5 col-sm-4">
+                            <button ng-click='searchQuerry()' ng-href='#' class="btn btn-success btn-lg">Quote Me</button>
+                        </div>
                     </div>
-                    <div class="col-md-5 col-sm-4">
-                        <button type="submit" class="btn btn-success btn-lg">Quote Me</button>
-                    </div>
-                </div>
-            </form>
+                </form>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,7 +86,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Hello</h1>
                         <p class="intro-text">Quote of the Day:</p>
-                        <div class="quote"></div>
+                        <div class="quote"> //message// </div>
                     </div>
                 </div>
             </div>
@@ -104,6 +107,7 @@
 
     <!-- Theme JavaScript -->
     <script src="../static/js/grayscale.min.js"></script>
+
 
 </body>
 
