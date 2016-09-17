@@ -167,6 +167,7 @@ def makeQuote(tweetList):
 	noPeriods = finalQuote[0:len(finalQuote)-1].replace('...',',')
 	finalQuote = noPeriods.replace('.',',')+finalQuote[len(finalQuote)-1]
 
+
 	
 	finalQuote = finalQuote[0].capitalize()+finalQuote[1:len(finalQuote)]
 		
@@ -194,6 +195,20 @@ def getTone(quote):
 	emotion = indices[emotions.index(m)]
 
 	return emotion
+
+
+	return finalQuote
+
+
+def getImage(screen_name, api):
+	user_info = api.get_user(screen_name)
+	if user_info.default_profile_image is False:
+		image_url = user_info.profile_image_url
+		image_url = image_url.replace('_normal', '')
+		return image_url
+	else:
+		return
+
 	
 def printQuote(screen_name):
 	api = authorize()
@@ -203,12 +218,17 @@ def printQuote(screen_name):
 		final = makeQuote(words)
 		emotion = getTone(final)
 		# image = getImage(screen_name, api)
+
 	print final
 	print emotion
 	# print image
+
 	return final
 
-printQuote('AnnCoulter')
+def findMusic():
+	return
+
+print printQuote('VaidehiGarg')
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
