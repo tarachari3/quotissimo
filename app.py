@@ -8,6 +8,7 @@ import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 import unicodedata
 import numpy
+import pyspotify
 
 app = Flask(__name__)
 
