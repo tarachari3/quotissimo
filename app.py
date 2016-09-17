@@ -192,7 +192,7 @@ def printQuote(screen_name):
 	if not (string is 'nope'):
 		words = parseTweets(string)
 		final = makeQuote(words)
-		# image = getImage(screen_name, api)
+		image = getImage(screen_name, api)
 	return final
 
 def findMusic():
