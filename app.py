@@ -207,27 +207,30 @@ def getImage(screen_name, api):
 		image_url = image_url.replace('_normal', '')
 		return image_url
 	else:
-		return
+		return 
 
 	
 def printQuote(screen_name):
-	api = authorize()
-	string = getTweets(screen_name, api)
-	if not (string is 'nope'):
-		words = parseTweets(string)
-		final = makeQuote(words)
-		image = getImage(screen_name, api)
-		emotion = getTone(final)
-		# image = getImage(screen_name, api)
+	try:
+		api = authorize()
+		string = getTweets(screen_name, api)
+		if not (string is 'nope'):
+			words = parseTweets(string)
+			final = makeQuote(words)
+			image = getImage(screen_name, api)
+			emotion = getTone(final)
+			# image = getImage(screen_name, api)
 
-	print final
-	print emotion
-	# print image
+		print final
+		print emotion
+		# print image
+	except:
+		return 'JK - no quotes for you'
 
 def findMusic():
 	return
 
-print printQuote('VaidehiGarg')
+print printQuote('QuotaPotato')
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
