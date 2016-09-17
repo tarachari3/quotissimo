@@ -56,11 +56,7 @@ def makeQuote(tweetList):
 #for tweet in tweetList:
 
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
-	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=100),indent=2))['relations']
-
-	
-	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
-	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=300),indent=2))['relations']
+	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=500),indent=2))['relations']
 
 		#print json.dumps(alchemy_language.entities(text =tweetList,max_items=100),indent=2)
 
@@ -85,64 +81,64 @@ def makeQuote(tweetList):
 
 
 	# get prob.'s' (SUBJECTS)
-	for key,value in subjects.iteritems():
-		subjects[key] = value/len(subjects)
+	# for key,value in subjects.iteritems():
+	# 	subjects[key] = value/len(subjects)
 
-	# scale prob's
+	# # scale prob's
 
-		# get prob.'s' (SUBJECTS)
-	for key,value in subjects.iteritems():
-		subjects[key] = value/len(subjects)
+	# 	# get prob.'s' (SUBJECTS)
+	# for key,value in subjects.iteritems():
+	# 	subjects[key] = value/len(subjects)
 
-		# scale prob's
+	# 	# scale prob's
 
-	sum =0.0;
-	for key,value in subjects.iteritems():
-		sum = sum + value
-	for key,value in subjects.iteritems():
-		subjects[key] = value/sum
-	#------------------------
-
-
-
-	# get prob.'s' (OBJECTS)
-	for key,value in objects.iteritems():
-		objects[key] = value/len(objects)
-
-	# scale prob's
-
-		# get prob.'s' (OBJECTS)
-	for key,value in objects.iteritems():
-		objects[key] = value/len(objects)
-
-		# scale prob's
-
-	sum =0.0;
-	for key,value in objects.iteritems():
-		sum = sum + value
-	for key,value in objects.iteritems():
-		objects[key] = value/sum
-	#------------------------
+	# sum =0.0;
+	# for key,value in subjects.iteritems():
+	# 	sum = sum + value
+	# for key,value in subjects.iteritems():
+	# 	subjects[key] = value/sum
+	# #------------------------
 
 
 
-	# get prob.'s' (ACTIONS)
-	for key,value in actions.iteritems():
-		actions[key] = value/len(actions)
+	# # get prob.'s' (OBJECTS)
+	# for key,value in objects.iteritems():
+	# 	objects[key] = value/len(objects)
 
-	# scale prob's
+	# # scale prob's
 
-		# get prob.'s' (ACTIONS)
-	for key,value in actions.iteritems():
-		actions[key] = value/len(actions)
+	# 	# get prob.'s' (OBJECTS)
+	# for key,value in objects.iteritems():
+	# 	objects[key] = value/len(objects)
 
-		# scale prob's
+	# 	# scale prob's
 
-	sum =0.0;
-	for key,value in actions.iteritems():
-		sum = sum + value
-	for key,value in actions.iteritems():
-		actions[key] = value/sum
+	# sum =0.0;
+	# for key,value in objects.iteritems():
+	# 	sum = sum + value
+	# for key,value in objects.iteritems():
+	# 	objects[key] = value/sum
+	# #------------------------
+
+
+
+	# # get prob.'s' (ACTIONS)
+	# for key,value in actions.iteritems():
+	# 	actions[key] = value/len(actions)
+
+	# # scale prob's
+
+	# 	# get prob.'s' (ACTIONS)
+	# for key,value in actions.iteritems():
+	# 	actions[key] = value/len(actions)
+
+	# 	# scale prob's
+
+	# sum =0.0;
+	# for key,value in actions.iteritems():
+	# 	sum = sum + value
+	# for key,value in actions.iteritems():
+	# 	actions[key] = value/sum
 	#------------------------
 
 
@@ -159,9 +155,7 @@ def makeQuote(tweetList):
 
 	#print finalQuote
 
-	if startSubject.islower():
-		startSubject = startSubject.title()
-	if not nextVerb.islower() and not nextVerb.isupper():
+	if (not nextVerb.islower() and not nextVerb.isupper()):
 		nextVerb = nextVerb.lower()
 
 	if "'" in nextVerb:
@@ -172,6 +166,36 @@ def makeQuote(tweetList):
 
 	noPeriods = finalQuote[0:len(finalQuote)-1].replace('...',',')
 	finalQuote = noPeriods.replace('.',',')+finalQuote[len(finalQuote)-1]
+
+
+	
+	finalQuote = finalQuote[0].capitalize()+finalQuote[1:len(finalQuote)]
+		
+
+
+		#print finalQuote
+
+	return finalQuote
+
+	
+# def getImage(screen_name, api):
+# 		user_info = api.get_user(screen_name)
+# 		if user_info
+def getTone(quote):
+	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
+	emotions = []
+	indices = ['anger','disgust','fear','sadness','joy']
+	emotions.append(json.loads(json.dumps(json.loads(json.dumps(alchemy_language.emotion(text = quote),indent=2))['docEmotions']))['anger'])
+	emotions.append(json.loads(json.dumps(json.loads(json.dumps(alchemy_language.emotion(text = quote),indent=2))['docEmotions']))['disgust'])
+	emotions.append(json.loads(json.dumps(json.loads(json.dumps(alchemy_language.emotion(text = quote),indent=2))['docEmotions']))['fear'])
+	emotions.append(json.loads(json.dumps(json.loads(json.dumps(alchemy_language.emotion(text = quote),indent=2))['docEmotions']))['sadness'])
+	emotions.append(json.loads(json.dumps(json.loads(json.dumps(alchemy_language.emotion(text = quote),indent=2))['docEmotions']))['joy'])
+
+	m = max(emotions)
+	emotion = indices[emotions.index(m)]
+
+	return emotion
+
 
 	return finalQuote
 
@@ -193,7 +217,12 @@ def printQuote(screen_name):
 		words = parseTweets(string)
 		final = makeQuote(words)
 		image = getImage(screen_name, api)
-	return final
+		emotion = getTone(final)
+		# image = getImage(screen_name, api)
+
+	print final
+	print emotion
+	# print image
 
 def findMusic():
 	return
