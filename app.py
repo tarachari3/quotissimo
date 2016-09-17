@@ -178,10 +178,7 @@ def makeQuote(tweetList):
 
 	return finalQuote
 
-	
-# def getImage(screen_name, api):
-# 		user_info = api.get_user(screen_name)
-# 		if user_info
+
 def getTone(quote):
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 	emotions = []
