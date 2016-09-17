@@ -38,107 +38,106 @@ def getTweets(screen_name, api):
 		return 'nope'
 
 def parseTweets(tweet_string):
-	if tweet_string is 'nope':
-		return tweet_string
-	else:
-		words = tweet_string.split()
-		toRemove = ['-', '_', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', 'htt', 'RT' , '`', '(', ')', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}', '...', '..']
-		for char in toRemove:
-			for x in words:
-				if char in x:
-					ind = words.index(x)
-					words[ind] = '*'
-				elif '|' in x:
-					ind = words.index(x)
-					words[ind] = '.'
-		words = filter(lambda a: a != '*', words)
-		return ' '.join(words)
+	words = tweet_string.split()
+	toRemove = ['-', '_', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', 'htt', 'RT' , '`', '(', ')', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}', '...', '..']
+	for char in toRemove:
+		for x in words:
+			if char in x:
+				ind = words.index(x)
+				words[ind] = '*'
+			elif '|' in x:
+				ind = words.index(x)
+				words[ind] = '.'
+	words = filter(lambda a: a != '*', words)
+	return ' '.join(words)
 
 def makeQuote(tweetList): 
 #for tweet in tweetList:
-	if tweetList is 'nope':
-		finalQuote = "We can't seem to find this person"
-		#print finalQuote
-	else:
-		alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
-		relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=100),indent=2))['relations']
+	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
+	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=100),indent=2))['relations']
 
-		subjects = dict()
-		actions = dict()
-		objects = dict()
+	subjects = dict()
+	actions = dict()
+	objects = dict()
 
-		for i in relations:
-			if 'subject' in i:
-				subjectWord = json.loads(json.dumps(json.loads(json.dumps(i))['subject']))['text']
-				if subjectWord not in subjects:
-					subjects[subjectWord] = float(tweetList.count(subjectWord))
-			if 'action' in i:
-				actionWord = json.loads(json.dumps(json.loads(json.dumps(i))['action']))['text']
-				if actionWord not in actions:
-					actions[actionWord] = float(tweetList.count(actionWord))
-			if 'object' in i:
-				objectWord = json.loads(json.dumps(json.loads(json.dumps(i))['object']))['text']
-				if objectWord not in objects:
-					objects[objectWord] = float(tweetList.count(objectWord))
+	for i in relations:
+		if 'subject' in i:
+			subjectWord = json.loads(json.dumps(json.loads(json.dumps(i))['subject']))['text']
+			if subjectWord not in subjects:
+				subjects[subjectWord] = float(tweetList.count(subjectWord))
+		if 'action' in i:
+			actionWord = json.loads(json.dumps(json.loads(json.dumps(i))['action']))['text']
+			if actionWord not in actions:
+				actions[actionWord] = float(tweetList.count(actionWord))
+		if 'object' in i:
+			objectWord = json.loads(json.dumps(json.loads(json.dumps(i))['object']))['text']
+			if objectWord not in objects:
+				objects[objectWord] = float(tweetList.count(objectWord))
 
-		# get prob.'s' (SUBJECTS)
-		for key,value in subjects.iteritems():
-			subjects[key] = value/len(subjects)
+	# get prob.'s' (SUBJECTS)
+	for key,value in subjects.iteritems():
+		subjects[key] = value/len(subjects)
 
-		# scale prob's
-		sum =0.0;
-		for key,value in subjects.iteritems():
-			sum = sum + value
-		for key,value in subjects.iteritems():
-			subjects[key] = value/sum
-		#------------------------
+	# scale prob's
+	sum =0.0;
+	for key,value in subjects.iteritems():
+		sum = sum + value
+	for key,value in subjects.iteritems():
+		subjects[key] = value/sum
+	#------------------------
 
 
-		# get prob.'s' (OBJECTS)
-		for key,value in objects.iteritems():
-			objects[key] = value/len(objects)
+	# get prob.'s' (OBJECTS)
+	for key,value in objects.iteritems():
+		objects[key] = value/len(objects)
 
-		# scale prob's
-		sum =0.0;
-		for key,value in objects.iteritems():
-			sum = sum + value
-		for key,value in objects.iteritems():
-			objects[key] = value/sum
-		#------------------------
+	# scale prob's
+	sum =0.0;
+	for key,value in objects.iteritems():
+		sum = sum + value
+	for key,value in objects.iteritems():
+		objects[key] = value/sum
+	#------------------------
 
 
-		# get prob.'s' (ACTIONS)
-		for key,value in actions.iteritems():
-			actions[key] = value/len(actions)
+	# get prob.'s' (ACTIONS)
+	for key,value in actions.iteritems():
+		actions[key] = value/len(actions)
 
-		# scale prob's
-		sum =0.0;
-		for key,value in actions.iteritems():
-			sum = sum + value
-		for key,value in actions.iteritems():
-			actions[key] = value/sum
-		#------------------------
+	# scale prob's
+	sum =0.0;
+	for key,value in actions.iteritems():
+		sum = sum + value
+	for key,value in actions.iteritems():
+		actions[key] = value/sum
+	#------------------------
 
-		# GENERATE QUOTE
+	# GENERATE QUOTE
 
-		startSubject = numpy.random.choice(subjects.keys(),1)[0]
-		nextVerb = numpy.random.choice(actions.keys(),1)[0]
-		lastObj = numpy.random.choice(objects.keys(),1)[0]
+	startSubject = numpy.random.choice(subjects.keys(),1)[0]
+	nextVerb = numpy.random.choice(actions.keys(),1)[0]
+	lastObj = numpy.random.choice(objects.keys(),1)[0]
 
-		finalQuote = startSubject+" "+nextVerb+" "+lastObj
+	finalQuote = startSubject+" "+nextVerb+" "+lastObj
 
-		#print finalQuote
+	#print finalQuote
 	return finalQuote
 
-		#return 'Hello, World!'
+	
+def getImage(screen_name, api):
+		user_info = api.get_user(screen_name)
+		if user_info
 
 	
 def printQuote(screen_name):
 	api = authorize()
 	string = getTweets(screen_name, api)
-	words = parseTweets(string)
-	final = makeQuote(words)
+	if not (string is 'nope'):
+		words = parseTweets(string)
+		final = makeQuote(words)
+		image = getImage(screen_name, api)
 	print final
+	print image
 	return final
 
 printQuote('AnnCoulter')
