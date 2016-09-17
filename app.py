@@ -18,30 +18,31 @@ def quoteGen(screen_name):
 
 	api = tweepy.API(auth)
 
-	public_tweets = api.user_timeline(screen_name)
+	public_tweets = api.user_timeline(screen_name, count = 2000)
 	tweet_string = ''
 	for tweet in public_tweets:
 	    tweet_string = tweet_string + tweet.text
-	return tweet_string
+	return tweet_string.encode('utf-8')
 
 def removeUsers(tweet_string):
-	tokens = nltk.word_tokenize(tweet_string)
-	for x in tokens:
-		if '@' in x:
-			ind = tokens.index(x)
-			tokens.remove(x)
-			tokens.remove(tokens[ind])
-
-	return tokens
+	words = tweet_string.split()
+	toRemove = ['-', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', '`', '(', ')', '|', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}']
+	for char in toRemove:
+		for x in words:
+			if char in x:
+				ind = words.index(x)
+				words[ind] = '*'
+	words = filter(lambda a: a != '*', words)
+	return words
 	
 
 string = quoteGen('AnnCoulter')
-tokens = removeUsers(string)
-print tokens
+words = removeUsers(string)
+print words
 
+length = len(words)
+print words[length-1]
 
-
-	    
 # 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
 #     return 'Hello, World!'
