@@ -37,7 +37,9 @@ def removeUsers(tweet_string):
 			if char in x:
 				ind = words.index(x)
 				words[ind] = '*'
-			else if 
+			else if '|' in x:
+				ind = words.index(x)
+				words[ind] = '.'
 	words = filter(lambda a: a != '*', words)
 	return words
 	
