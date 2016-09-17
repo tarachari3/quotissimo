@@ -179,7 +179,7 @@ def makeQuote(tweetList):
 
 	return finalQuote
 
-	
+
 def getImage(screen_name, api):
 	user_info = api.get_user(screen_name)
 	if user_info.default_profile_image is False:
@@ -187,8 +187,7 @@ def getImage(screen_name, api):
 		image_url = image_url.replace('_normal', '')
 		return image_url
 	else:
-		return 
-	# user_info.default_profile_image
+		return
 
 	
 def printQuote(screen_name):
@@ -197,9 +196,9 @@ def printQuote(screen_name):
 	if not (string is 'nope'):
 		words = parseTweets(string)
 		final = makeQuote(words)
-		image = getImage(screen_name, api)
+		# image = getImage(screen_name, api)
 	print final
-	print image
+	# print image
 	return final
 
 def findMusic():
