@@ -172,10 +172,6 @@ def makeQuote(tweetList):
 
 	noPeriods = finalQuote[0:len(finalQuote)-1].replace('...',',')
 	finalQuote = noPeriods.replace('.',',')+finalQuote[len(finalQuote)-1]
-		
-
-
-		#print finalQuote
 
 	return finalQuote
 
@@ -197,14 +193,12 @@ def printQuote(screen_name):
 		words = parseTweets(string)
 		final = makeQuote(words)
 		# image = getImage(screen_name, api)
-	print final
-	# print image
 	return final
 
 def findMusic():
 	return
 
-printQuote('VaidehiGarg')
+print printQuote('VaidehiGarg')
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
