@@ -42,7 +42,7 @@ def parseTweets(tweet_string):
 		return tweet_string
 	else:
 		words = tweet_string.split()
-		toRemove = ['-', '_', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', 'htt', 'RT' , '`', '(', ')', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}']
+		toRemove = ['-', '_', '<', '@', ':', '.com', '.COM', '.edu', '>', '.uk', '/', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"', '#', 'htt', 'RT' , '`', '(', ')', '^', '#', '$', '%', '_', '=', '+', '[', ']', '{', '}', '...', '..']
 		for char in toRemove:
 			for x in words:
 				if char in x:
@@ -133,11 +133,15 @@ def makeQuote(tweetList):
 		#return 'Hello, World!'
 
 	
-api = authorize()
-string = getTweets('AnnCoulter', api)
-words = parseTweets(string)
-final = makeQuote(words)
-print final 
+def printQuote(screen_name):
+	api = authorize()
+	string = getTweets(screen_name, api)
+	words = parseTweets(string)
+	final = makeQuote(words)
+	print final
+	return final
+
+printQuote('AnnCoulter')
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
