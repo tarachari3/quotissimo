@@ -1,5 +1,6 @@
 # coding: utf-8
 # pip install --upgrade watson-developer-cloud
+import os
 from flask import Flask
 from flask import request, render_template
 import json
@@ -10,6 +11,9 @@ import requests
 import numpy 
 
 app = Flask(__name__)
+app.config.update(
+    DEBUG = True,
+)
 
 @app.route('/')
 def index():
@@ -169,7 +173,9 @@ def returnData():
 def givesomething():
 	return json.loads(request.data)['name']
 
-
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
