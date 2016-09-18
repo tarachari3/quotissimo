@@ -15,7 +15,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/quoteGen')
+@app.route('/quoteGen',methods=['POST'])
 def authorizeTwitter():
 	auth = tweepy.OAuthHandler('xpGsNwsKdtsMus1dZBBINYHcf', '6IKBQVjymWRGreXHkKhDg7EG8IEd14cewJAHC0zSn82Cf8bdzJ')
 	auth.set_access_token('776993594980831232-UcnUJa08VgIR5WMPmRLlam3QFyZ4hb1', '9KRcUxxjfSPluY3UsDaD9Wx60CT97OThehDpoFRPe9AW3')
@@ -226,6 +226,7 @@ def getBackgroundImage(emotion):
 
 	
 def printQuote(screen_name):
+
 	try:
 		api = authorizeTwitter()
 		string = getTweets(screen_name, api)
@@ -243,12 +244,13 @@ def printQuote(screen_name):
 		return 'JK - no quotes for you'
 
 
-# print printQuote('AnnCoulter')
-
+def findMusic():
+	return
 
 @app.route('/quoteGen2', methods=['POST'])
 def givesomething():
-	return request.querry
+	return json.loads(request.data)['name']
+
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
