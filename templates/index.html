@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    img{
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+</style>
 
 <head>
 
@@ -31,10 +37,11 @@
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> 
+    <img src="https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png" width="40" height ="40" alt="" />
 
     <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:none;border:none;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
@@ -46,7 +53,7 @@
                         <input class="form-control input-lg" name="email" type="email" id="address" placeholder="enter a twitter name" data-validate="validate(required, email)" required="required">
                     </div>
                     <div class="col-md-5 col-sm-4">
-                        <button type="submit" class="btn btn-success btn-lg">Quote Me</button>
+                        <button type="submit" class="btn btn-success btn-lg" style="background-color:rgba(204, 204, 204, 0.52);border-color:transparent;border-radius:5px;">Quote Me</button>
                     </div>
                 </div>
             </form>
@@ -60,13 +67,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#">@AnnCoulter</a>
+                        <a class="page-scroll" href="#" style="background-color:rgba(204,204,204,.52);border:1px solid;border-color:transparent;border-radius:5px;margin-left:5px;margin-right:5px;">@AnnCoulter</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#">@Kanyewest</a>
+                        <a class="page-scroll" href="#" style="background-color:rgba(204,204,204,.52);border:1px solid;border-color:transparent;border-radius:5px;margin-left:5px;margin-right:5px;">@kanyewest</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#">@officialjaden</a>
+                        <a class="page-scroll" href="#" style="background-color:rgba(204,204,204,.52);border:1px solid;border-color:transparent;border-radius:5px;margin-left:5px;margin-right:5px;">@officialjaden</a>
                     </li>
                 </ul>
             </div>
@@ -76,13 +83,14 @@
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro">
+    <header class="intro" style ="background-image:url(http://img.wallpaperfolder.com/f/52D11053F082/lavender-field-sunset-flower-37645.jpg);height:100%;">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Hello</h1>
-                        <p class="intro-text">Quote of the Day:</p>
+                        <h1 class="brand-heading" style="margin:0 0 15px;font-weight:100;">Hello!</h1>
+                        <small style="font-family: Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif;font-size:130%;">Your daily dose of things the world's most b@tsh*t celebrities would probably say</small>
+                        <br><br><br><br><p class="intro-text" style ="font-size:50px;font-style:italic;">" Things Ann Coulter Thinks "</p>
                         <div class="quote"></div>
                     </div>
                 </div>
@@ -104,6 +112,15 @@
 
     <!-- Theme JavaScript -->
     <script src="../static/js/grayscale.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).mousemove(function(e){
+                $('img').css('left',e.pageX+30+"px");
+                $('img').css('top',e.pageY+30+"px");
+            });
+        }); 
+    </script>
 
 </body>
 
