@@ -4,11 +4,8 @@ from flask import Flask
 from flask import request, render_template
 import json
 import tweepy
-import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 import unicodedata
-import numpy
-import random
 import requests
 
 app = Flask(__name__)
@@ -206,7 +203,7 @@ def findMusic(quoteTone):
 	pick_track = {'anger':'0kly0FygSDXVbvbXxsZ31S','disgust':'0kly0FygSDXVbvbXxsZ31S', 'fear':'0kly0FygSDXVbvbXxsZ31S', 'sadness':'0kly0FygSDXVbvbXxsZ31S', 'joy':'0kly0FygSDXVbvbXxsZ31S'}
 	track_uri = pick_track.get(quoteTone)
 	r = requests.get("https://api.spotify.com/v1/tracks/" + track_uri)
-	print json.loads(r.content)['preview_url']
+	return json.loads(r.content)['preview_url']
 
 
 def getBackgroundImage(emotion):
@@ -233,13 +230,13 @@ def printQuote(screen_name):
 			background_image = getBackgroundImage(emotion)
 		stuff_dict = {'background-image':background_image, 'profile-image':profile_image, 'final-quote':final, 'song-url':music_preview}
 		stuff = json.dumps(stuff_dict)
-		print stuff
+		# print stuff
 		return final
 	except:
 		return 'JK - no quotes for you'
 
 
-print printQuote('AnnCoulter')
+# print printQuote('AnnCoulter')
 
 
 @app.route('/quoteGen2', methods=['POST'])
