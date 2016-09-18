@@ -247,14 +247,14 @@ def printQuote(screen_name):
 def findMusic():
 	return
 
-<<<<<<< HEAD
+
 print printQuote('DeepakChopra')
-=======
+
 @app.route('/quoteGen2', methods=['POST'])
 def givesomething():
 	return json.loads(request.data)['name']
 
->>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
+
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))
