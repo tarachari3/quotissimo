@@ -2,7 +2,7 @@ var app = angular.module("myapp", []);
 
 app.controller('search', function($scope, $http){
 	$scope.querry={};
-	$scope.message="Things Ann Coulter Thinks";
+	$scope.message="Things A Twitter Person Might Think";
 	$scope.song_url = "";
 	$scope.profile_pic = "https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png";
 	$scope.background_image = "http://img.wallpaperfolder.com/f/52D11053F082/lavender-field-sunset-flower-37645.jpg";
