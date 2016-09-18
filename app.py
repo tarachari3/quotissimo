@@ -4,10 +4,9 @@ from flask import Flask
 from flask import request, render_template
 import json
 import tweepy
-import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 import unicodedata
-import numpy
+import requests
 
 app = Flask(__name__)
 
@@ -16,8 +15,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/quoteGen')
-def authorize():
+@app.route('/quoteGen',methods=['POST'])
+def authorizeTwitter():
 	auth = tweepy.OAuthHandler('xpGsNwsKdtsMus1dZBBINYHcf', '6IKBQVjymWRGreXHkKhDg7EG8IEd14cewJAHC0zSn82Cf8bdzJ')
 	auth.set_access_token('776993594980831232-UcnUJa08VgIR5WMPmRLlam3QFyZ4hb1', '9KRcUxxjfSPluY3UsDaD9Wx60CT97OThehDpoFRPe9AW3')
 
@@ -53,7 +52,6 @@ def parseTweets(tweet_string):
 	return ' '.join(words)
 
 def makeQuote(tweetList): 
-#for tweet in tweetList:
 
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 	relations = json.loads(json.dumps(alchemy_language.relations(text =tweetList,max_items=500),indent=2))['relations']
@@ -177,10 +175,7 @@ def makeQuote(tweetList):
 
 	return finalQuote
 
-	
-# def getImage(screen_name, api):
-# 		user_info = api.get_user(screen_name)
-# 		if user_info
+
 def getTone(quote):
 	alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 	emotions = []
@@ -196,38 +191,63 @@ def getTone(quote):
 
 	return emotion
 
-
-
-
 def getImage(screen_name, api):
 	user_info = api.get_user(screen_name)
-	if user_info.default_profile_image is False:
-		image_url = user_info.profile_image_url
-		image_url = image_url.replace('_normal', '')
-		return image_url
-	else:
-		return
+	# user_info.default_profile_image is False:
+	image_url = user_info.profile_image_url #small sized image for cursor
+	# image_url = image_url.replace('_normal', '')
+	return image_url 
+
+
+def findMusic(quoteTone):
+	pick_track = {'anger':'0kly0FygSDXVbvbXxsZ31S','disgust':'0kly0FygSDXVbvbXxsZ31S', 'fear':'0kly0FygSDXVbvbXxsZ31S', 'sadness':'0kly0FygSDXVbvbXxsZ31S', 'joy':'0kly0FygSDXVbvbXxsZ31S'}
+	track_uri = pick_track.get(quoteTone)
+	r = requests.get("https://api.spotify.com/v1/tracks/" + track_uri)
+	return json.loads(r.content)['preview_url']
+
+
+def getBackgroundImage(emotion):
+	emotionImages = dict()
+
+	emotionImages['disgust'] = 'http://allpicts.in/download/591/Wallpaper_Desktop_Nature_Backgrounds_green_leaves.jpg/'
+	emotionImages['anger'] = 'http://img.wallpaperfolder.com/f/542837FF0399/ruby-red-forest-nature-20979.jpg'
+	emotionImages['joy'] = 'http://magicwall.ru/wallpapers/flower-04_10918289@N07_by.jpg'
+	emotionImages['sadness'] = 'http://www.qqxxzx.com/images/nature-wallpapers/nature-wallpapers-21.jpg'
+	emotionImages['fear'] = 'http://wallpaperhd4k.com/wp-content/uploads/2015/10/Flowers-purple-dark-nature-beautiful-top-uhd-4k-wallpapers-2560x1440.jpg'
+
+	return emotionImages[emotion]
 
 	
 def printQuote(screen_name):
-	api = authorize()
-	string = getTweets(screen_name, api)
-	if not (string is 'nope'):
-		words = parseTweets(string)
-		final = makeQuote(words)
-		emotion = getTone(final)
-		# image = getImage(screen_name, api)
 
-	print final
-	print emotion
-	# print image
+	try:
+		api = authorizeTwitter()
+		string = getTweets(screen_name, api)
+		if not (string is 'nope'):
+			final = makeQuote(parseTweets(string))
+			profile_image = getImage(screen_name, api)
+			emotion = getTone(final)
+			music_preview = findMusic(emotion)
+			background_image = getBackgroundImage(emotion)
+		stuff_dict = {'background-image':background_image, 'profile-image':profile_image, 'final-quote':final, 'song-url':music_preview}
+		stuff = json.dumps(stuff_dict)
+		# print stuff
+		return final
+	except:
+		return 'JK - no quotes for you'
 
-	return final
 
 def findMusic():
 	return
 
+<<<<<<< HEAD
 print printQuote('DeepakChopra')
+=======
+@app.route('/quoteGen2', methods=['POST'])
+def givesomething():
+	return json.loads(request.data)['name']
+
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
 
 # alchemy_language = AlchemyLanguageV1(api_key='e06c74ac7872e80fbad8f78f7a670c662ecee9d1')
 # print(json.dumps(alchemy_language.keywords(url='twitter.com/ibmwatson'),indent=2))

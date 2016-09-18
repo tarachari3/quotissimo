@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
 <style>
     img{
@@ -6,6 +7,9 @@
         transform: translate(-50%, -50%);
     }
 </style>
+=======
+<html lang="en" ng-app="myapp">
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
 
 <head>
 
@@ -35,11 +39,18 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="../static/js/searchtwitter.js"></script>
 </head>
 
+<<<<<<< HEAD
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> 
     <img src="https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png" width="40" height ="40" alt="" />
 
+=======
+<body ng-controller="search" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:none;border:none;">
         <div class="container">
@@ -47,6 +58,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
                 </button>
+<<<<<<< HEAD
                 <form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
                 <div class="form-group">
                     <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
@@ -54,9 +66,19 @@
                     </div>
                     <div class="col-md-5 col-sm-4">
                         <button type="submit" class="btn btn-success btn-lg" style="background-color:rgba(204, 204, 204, 0.52);border-color:transparent;border-radius:5px;">Quote Me</button>
+=======
+
+                <form class="form-horizontal" role="form" id="subscribeForm">
+                    <div class="form-group">
+                        <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
+                            <input ng-model='querry.name' class="form-control input-lg" type="text" placeholder="enter a twitter name">
+                        </div>
+                        <div class="col-md-5 col-sm-4">
+                            <button ng-click='searchQuerry()' ng-href='#' class="btn btn-success btn-lg">Quote Me</button>
+                        </div>
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,10 +110,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
+<<<<<<< HEAD
                         <h1 class="brand-heading" style="margin:0 0 15px;font-weight:100;">Hello!</h1>
                         <small style="font-family: Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif;font-size:130%;">Your daily dose of things the world's most b@tsh*t celebrities would probably say</small>
                         <br><br><br><br><p class="intro-text" style ="font-size:50px;font-style:italic;">" Things Ann Coulter Thinks "</p>
                         <div class="quote"></div>
+=======
+                        <h1 class="brand-heading">Hello</h1>
+                        <p class="intro-text">Quote of the Day:</p>
+                        <div class="quote"> //message// </div>
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
                     </div>
                 </div>
             </div>
@@ -113,6 +141,7 @@
     <!-- Theme JavaScript -->
     <script src="../static/js/grayscale.min.js"></script>
 
+<<<<<<< HEAD
     <script type="text/javascript">
         $(document).ready(function(){
             $(document).mousemove(function(e){
@@ -121,6 +150,8 @@
             });
         }); 
     </script>
+=======
+>>>>>>> ad763818b2d5cb9e5a9a2d3bcf6c6c0991fc6123
 
 </body>
 
