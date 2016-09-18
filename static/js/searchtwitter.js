@@ -11,16 +11,13 @@ app.controller('search', function($scope, $http){
 		else {
             $http({
               method: 'POST',
-              url: '/quoteGen',
-              data: $scope.querry
+              url: '/quoteGen2',
+              data: angular.toJson($scope.querry)
             }).then(function successCallback(response) {
                 // this callback will be called asynchronously when the response is available
-                if (response.data.result != undefined) {
-                    $scope.message = response.data.result;
-                } else if (response.data.redirect == true) {
-                    window.location = '/'
-                } else {
-                  $scope.message = "Login Failed, please try again."
+                if (response.data != undefined) {
+                	//$test = angular.fromJson(response.data);
+                    $scope.message = response.data;
                 }
 
               }, function errorCallback(response) {
