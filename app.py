@@ -197,8 +197,8 @@ def getTone(quote):
 def getImage(screen_name, api):
 	user_info = api.get_user(screen_name)
 	# user_info.default_profile_image is False:
-	image_url = user_info.profile_image_url
-	image_url = image_url.replace('_normal', '')
+	image_url = user_info.profile_image_url #small sized image for cursor
+	# image_url = image_url.replace('_normal', '')
 	return image_url 
 
 
@@ -226,12 +226,14 @@ def printQuote(screen_name):
 		api = authorizeTwitter()
 		string = getTweets(screen_name, api)
 		if not (string is 'nope'):
-			words = parseTweets(string)
-			final = makeQuote(words)
+			final = makeQuote(parseTweets(string))
 			profile_image = getImage(screen_name, api)
 			emotion = getTone(final)
 			music_preview = findMusic(emotion)
 			background_image = getBackgroundImage(emotion)
+		stuff_dict = {'background-image':background_image, 'profile-image':profile_image, 'final-quote':final, 'song-url':music_preview}
+		stuff = json.dumps(stuff_dict)
+		print stuff
 		return final
 	except:
 		return 'JK - no quotes for you'
