@@ -200,7 +200,14 @@ def getImage(screen_name, api):
 
 
 def findMusic(quoteTone):
-	pick_track = {'anger':'0kly0FygSDXVbvbXxsZ31S','disgust':'0kly0FygSDXVbvbXxsZ31S', 'fear':'0kly0FygSDXVbvbXxsZ31S', 'sadness':'0kly0FygSDXVbvbXxsZ31S', 'joy':'0kly0FygSDXVbvbXxsZ31S'}
+	pick_track = dict()
+
+	pick_track['disgust'] = '39tLc4Xp58Lu4KcWHggeE2'
+	pick_track['fear'] = '13CyXxYgWD9N5KwWqRYU1U'
+	pick_track['joy'] = '0rTkE0FmT4zT2xL6GXwosU'
+	pick_track['sadness'] = '4kflIGfjdZJW4ot2ioixTB'
+	pick_track['anger'] = '7AqISujIaWcY3h5zrOqt5v'
+
 	track_uri = pick_track.get(quoteTone)
 	r = requests.get("https://api.spotify.com/v1/tracks/" + track_uri)
 	return json.loads(r.content)['preview_url']
@@ -232,7 +239,7 @@ def printQuote(screen_name):
 		stuff_dict = {'background-image':background_image, 'profile-image':profile_image, 'final-quote':final, 'song-url':music_preview}
 		stuff = json.dumps(stuff_dict)
 		# print stuff
-		return final
+		return stuff
 	except:
 		return 'JK - no quotes for you'
 
