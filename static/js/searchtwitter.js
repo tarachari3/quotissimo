@@ -2,7 +2,10 @@ var app = angular.module("myapp", []);
 
 app.controller('search', function($scope, $http){
 	$scope.querry={};
-	$scope.message="";
+	$scope.message="Things Ann Coulter Thinks";
+	$scope.song_url = "";
+	$scope.profile_pic = "";
+	$scope.background = "";
 
 	$scope.searchQuerry = function(){
 		if (angular.equals({}, $scope.querry)) {
@@ -11,19 +14,23 @@ app.controller('search', function($scope, $http){
 		else {
             $http({
               method: 'POST',
-              url: '/quoteGen2',
+              url: '/quoteGen',
               data: angular.toJson($scope.querry)
             }).then(function successCallback(response) {
-                // this callback will be called asynchronously when the response is available
                 if (response.data != undefined) {
-                	//$test = angular.fromJson(response.data);
-                    $scope.message = response.data;
+                	var res = angular.fromJson(response.data);
+                	if (res.error != undefined) {
+                		 $scope.message = res.error;
+                	} else {
+                		$scope.message = res.final_quote;
+                		$('#background_image').css('background-image', 'url(' + $scope.background_image + ')');
+                		$scope.song_url = res.song_url;
+						$scope.profile_pic = res.profile_image;
+                	}
                 }
 
               }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                $scope.message = 'Login Failed, please try again.';
+                $scope.message = 'Query failed, please try again.';
               });	
 		}
 	}

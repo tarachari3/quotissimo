@@ -45,11 +45,9 @@
 </head>
 
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> 
-    <img src="https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png" width="40" height ="40" alt="" />
-
-
 <body ng-controller="search" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!--mouse image-->
+    <img src=https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png width="40" height ="40" alt="" id='profile_image'/>
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:none;border:none;">
@@ -59,13 +57,13 @@
                     Menu <i class="fa fa-bars"></i>
                 </button>
 
-                <form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
+                <form class="form-horizontal" role="form" id="subscribeForm">
                 <div class="form-group">
                     <div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
-                        <input class="form-control input-lg" name="email" type="email" id="address" placeholder="enter a twitter name" data-validate="validate(required, email)" required="required">
+                        <input ng-model='querry.name' class="form-control input-lg" type="text" placeholder="enter a twitter name">
                     </div>
                     <div class="col-md-5 col-sm-4">
-                        <button type="submit" class="btn btn-success btn-lg" style="background-color:rgba(204, 204, 204, 0.52);border-color:transparent;border-radius:5px;">Quote Me</button>
+                        <button ng-click='searchQuerry()' ng-href='#' type="submit" class="btn btn-success btn-lg" style="background-color:rgba(204, 204, 204, 0.52);border-color:transparent;border-radius:5px;">Quote Me</button>
                     </div>
                 </div>
                 </form>
@@ -98,18 +96,15 @@
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro" style ="background-image:url(http://img.wallpaperfolder.com/f/52D11053F082/lavender-field-sunset-flower-37645.jpg);height:100%;">
+    <header id='background_image' class="intro" style ="background-image:url(http://img.wallpaperfolder.com/f/52D11053F082/lavender-field-sunset-flower-37645.jpg);height:100%;">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-
                         <h1 class="brand-heading" style="margin:0 0 15px;font-weight:100;">Hello!</h1>
+                        <br><br>
                         <small style="font-family: Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif;font-size:130%;">Your daily dose of things the world's most b@tsh*t celebrities would probably say</small>
-                        <br><br><br><br><p class="intro-text" style ="font-size:50px;font-style:italic;">" Things Ann Coulter Thinks "</p>
-                        <div class="quote"></div>
-
-                    
+                        <br><br><br><p class="intro-text" style ="font-size:40px;font-style:italic;">"//message//"</p>
                     </div>
                 </div>
             </div>
