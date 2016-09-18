@@ -25,7 +25,7 @@ app.controller('search', function($scope, $http){
                 		$scope.message = res.final_quote;
                 		$scope.song_url = res.song_url;
 						$scope.profile_pic = res.profile_image;
-						$scope.background = res.background_image;
+						$scope.background = res.background_image; // change to scope.background_image ??
                 	}
                 }
 
