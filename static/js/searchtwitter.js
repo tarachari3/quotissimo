@@ -4,8 +4,8 @@ app.controller('search', function($scope, $http){
 	$scope.querry={};
 	$scope.message="Things Ann Coulter Thinks";
 	$scope.song_url = "";
-	$scope.profile_pic = "";
-	$scope.background = "";
+	$scope.profile_pic = "https://pbs.twimg.com/profile_images/597794910155210752/yCf0aPVL.png";
+	$scope.background_image = "http://img.wallpaperfolder.com/f/52D11053F082/lavender-field-sunset-flower-37645.jpg";
 
 	$scope.searchQuerry = function(){
 		if (angular.equals({}, $scope.querry)) {
@@ -23,9 +23,9 @@ app.controller('search', function($scope, $http){
                 		 $scope.message = res.error;
                 	} else {
                 		$scope.message = res.final_quote;
-                		$('#background_image').css('background-image', 'url(' + $scope.background_image + ')');
                 		$scope.song_url = res.song_url;
 						$scope.profile_pic = res.profile_image;
+						$scope.background = res.background_image;
                 	}
                 }
 
